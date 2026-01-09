@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baram Rex - Oráculo Sagrado</title>
+    <title>Baram Rex - Oráculo de las 78 Puertas</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Garamond&display=swap');
         body { background: #0a0a0a; color: #e0e0e0; font-family: 'Garamond', serif; text-align: center; padding: 20px; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
@@ -23,82 +23,115 @@
 <div class="container">
     <h1 class="gold-text">Baram Rex</h1>
     <div id="intro">
-        <p style="font-style: italic; opacity: 0.8; margin-bottom: 30px;">"El mensaje que el universo tiene para ti hoy..."</p>
+        <p style="font-style: italic; opacity: 0.8; margin-bottom: 30px;">"El destino se revela ante ti..."</p>
         <button class="btn-draw" onclick="draw()">REVELAR MI CARTA</button>
     </div>
-
     <div id="result">
         <div id="card-display"></div>
         <div id="card-info"></div>
-        <button onclick="location.reload()" style="background:none; border:none; color:#d4af37; cursor:pointer; margin-top:20px; font-family:'Cinzel'; font-size: 0.8rem; letter-spacing: 1px;">✕ CONSULTAR OTRA VEZ</button>
+        <button onclick="location.reload()" style="background:none; border:none; color:#d4af37; cursor:pointer; margin-top:20px; font-family:'Cinzel'; font-size: 0.8rem; letter-spacing: 1px;">✕ VOLVER A CONSULTAR</button>
     </div>
 </div>
 
 <script>
-    // IMPORTANTE: Asegúrate de que los archivos en GitHub tengan estos nombres exactos
     const cards = [
-        {n: "El Loco", i: "el loco.png", r: "Nuevos comienzos.", d: "Confío en el viaje y doy el primer paso."},
-        {n: "El Mago", i: "el mago.png", r: "Poder creativo.", d: "Tengo todas las herramientas para lograrlo."},
-        {n: "La Sacerdotisa", i: "la sacerdotisa.png", r: "Intuición profunda.", d: "Escucho mi voz interior en el silencio."},
-        {n: "La Emperatriz", i: "la emperatriz.png", r: "Abundancia y fertilidad.", d: "Merezco recibir la belleza de la vida."},
-        {n: "El Emperador", i: "el emperador.png", r: "Autoridad y orden.", d: "Construyo mis sueños sobre bases sólidas."},
-        {n: "El Sumo Sacerdote", i: "el sumo sacerdote.png", r: "Tradición y guía.", d: "Busco la sabiduría en lo sagrado."},
-        {n: "Los Enamorados", i: "los enamorados.png", r: "Elecciones del corazón.", d: "Elijo el camino del amor y la armonía."},
-        {n: "El Carro", i: "el carro.png", r: "Victoria y determinación.", d: "Avanzo con fuerza hacia mis objetivos."},
-        {n: "La Justicia", i: "la justicia.png", r: "Equilibrio y verdad.", d: "Cosecho lo que he sembrado con honestidad."},
-        {n: "El Ermitaño", i: "el ermitaño.png", r: "Introspección.", d: "Busco la luz en mi propio interior."},
-        {n: "La Rueda de la Fortuna", i: "la rueda de la fortuna.png", r: "Cambios de destino.", d: "Acepto los ciclos naturales de la vida."},
-        {n: "La Fuerza", i: "la fuerza.png", r: "Coraje y paciencia.", d: "Domino mis sombras con compasión."},
-        {n: "El Colgado", i: "el colgado.png", r: "Nueva perspectiva.", d: "Suelto el control para ver la verdad."},
-        {n: "La Muerte", i: "la muerte.png", r: "Transformación profunda.", d: "Dejo morir lo viejo para renacer."},
-        {n: "La Templanza", i: "la templanza.png", r: "Moderación y paz.", d: "Encuentro el equilibrio en mis emociones."},
-        {n: "El Diablo", i: "el diablo.png", r: "Apegos y miedos.", d: "Me libero de las cadenas que yo mismo creé."},
-        {n: "La Torre", i: "la torre.png", r: "Revelación súbita.", d: "Construyo sobre la verdad, no sobre ilusiones."},
-        {n: "La Estrella", i: "la estrella.png", r: "Esperanza y fe.", d: "Confío en el flujo del universo."},
-        {n: "La Luna", i: "la luna.png", r: "Inconsciente y misterio.", d: "Atravieso mis miedos con claridad."},
-        {n: "El Sol", i: "el sol.png", r: "Éxito y claridad.", d: "Yo soy luz, éxito y alegría pura."},
-        {n: "El Juicio", i: "el juicio.png", r: "Renacimiento espiritual.", d: "Respondo al llamado de mi propósito."},
-        {n: "El Mundo", i: "el mundo.png", r: "Realización total.", d: "Soy uno con la danza del universo."}
-// --- ARCANOS MENORES ---
+        // ARCANOS MAYORES
+        {n: "El Loco", i: "el loco.png", r: "Nuevos comienzos.", d: "Confío en el viaje de la vida."},
+        {n: "El Mago", i: "el mago.png", r: "Poder y habilidad.", d: "Tengo los recursos para crear mi realidad."},
+        {n: "La Sacerdotisa", i: "la sacerdotisa.png", r: "Intuición.", d: "Escucho mi sabiduría interior."},
+        {n: "La Emperatriz", i: "la emperatriz.png", r: "Abundancia.", d: "Merezco la belleza y el crecimiento."},
+        {n: "El Emperador", i: "el emperador.png", r: "Estructura.", d: "Gobierno mi mundo con orden."},
+        {n: "El Sumo Sacerdote", i: "el sumo sacerdote.png", r: "Sabiduría.", d: "Sigo mi camino espiritual."},
+        {n: "Los Enamorados", i: "los enamorados.png", r: "Amor.", d: "Elijo desde el corazón."},
+        {n: "El Carro", i: "el carro.png", r: "Victoria.", d: "Avanzo con determinación."},
+        {n: "La Justicia", i: "la justicia.png", r: "Equilibrio.", d: "Soy honesto conmigo mismo."},
+        {n: "El Ermitaño", i: "el ermitaño.png", r: "Guía interior.", d: "Busco la verdad en mi silencio."},
+        {n: "La Rueda de la Fortuna", i: "la rueda de la fortuna.png", r: "Cambio.", d: "Acepto los ciclos del destino."},
+        {n: "La Fuerza", i: "la fuerza.png", r: "Fortaleza.", d: "Mi suavidad es mi poder."},
+        {n: "El Colgado", i: "el colgado.png", r: "Perspectiva.", d: "Suelto para ver la verdad."},
+        {n: "La Muerte", i: "la muerte.png", r: "Renacer.", d: "Suelto el pasado para transformarme."},
+        {n: "La Templanza", i: "la templanza.png", r: "Armonía.", d: "Encuentro el equilibrio emocional."},
+        {n: "El Diablo", i: "el diablo.png", r: "Límites.", d: "Me libero de mis miedos internos."},
+        {n: "La Torre", i: "la torre.png", r: "Liberación.", d: "Construyo sobre verdades sólidas."},
+        {n: "La Estrella", i: "la estrella.png", r: "Esperanza.", d: "Mi fe guía mi camino."},
+        {n: "La Luna", i: "la luna.png", r: "Misterio.", d: "Atravieso mis sombras con valentía."},
+        {n: "El Sol", i: "el sol.png", r: "Éxito.", d: "Brillo con alegría y plenitud."},
+        {n: "El Juicio", i: "el juicio.png", r: "Llamado.", d: "Despierto a una nueva vida."},
+        {n: "El Mundo", i: "el mundo.png", r: "Plenitud.", d: "He completado mi ciclo con éxito."},
+
         // BASTOS
-        {n: "As de Bastos", i: "as de bastos.png", r: "Energía pura.", d: "Empiezo este proyecto con pasión."},
-        {n: "Dos de Bastos", i: "dos de bastos.png", r: "Planificación.", d: "El mundo está en mis manos."},
-        {n: "Sota de Bastos", i: "sota de bastos.png", r: "Noticias emocionantes.", d: "Recibo la chispa de la inspiración."},
-        {n: "Rey de Bastos", i: "rey de bastos.png", r: "Liderazgo.", d: "Transformo mi visión en realidad."},
+        {n: "As de Bastos", i: "as de bastos.png", r: "Inspiración.", d: "Actúo con pasión hoy."},
+        {n: "Dos de Bastos", i: "dos de bastos.png", r: "Planes.", d: "Visualizo mi futuro éxito."},
+        {n: "Tres de Bastos", i: "tres de bastos.png", r: "Expansión.", d: "Mis barcos están llegando."},
+        {n: "Cuatro de Bastos", i: "cuatro de bastos.png", r: "Celebración.", d: "Disfruto de mi estabilidad."},
+        {n: "Cinco de Bastos", i: "cinco de bastos.png", r: "Desafío.", d: "Aprendo del conflicto."},
+        {n: "Seis de Bastos", i: "seis de bastos.png", r: "Reconocimiento.", d: "Celebro mis victorias."},
+        {n: "Siete de Bastos", i: "siete de bastos.png", r: "Defensa.", d: "Mantengo mi posición con fuerza."},
+        {n: "Ocho de Bastos", i: "ocho de bastos.png", r: "Rapidez.", d: "Todo avanza con agilidad."},
+        {n: "Nueve de Bastos", i: "nueve de bastos.png", r: "Resistencia.", d: "Persisto hasta el final."},
+        {n: "Diez de Bastos", i: "diez de bastos.png", r: "Carga.", d: "Suelto lo que no me pertenece."},
+        {n: "Sota de Bastos", i: "sota de bastos.png", r: "Mensajes.", d: "Recibo nuevas aventuras."},
+        {n: "Caballero de Bastos", i: "caballero de bastos.png", r: "Impulso.", d: "Avanzo con fuego."},
+        {n: "Reina de Bastos", i: "reina de bastos.png", r: "Confianza.", d: "Soy magnético y audaz."},
+        {n: "Rey de Bastos", i: "rey de bastos.png", r: "Visión.", d: "Lidero con determinación."},
 
         // COPAS
-        {n: "As de Copas", i: "as de copas.png", r: "Amor naciente.", d: "Mi copa rebosa de bendiciones."},
-        {n: "Dos de Copas", i: "dos de copas.png", r: "Conexión sagrada.", d: "Atraigo relaciones en equilibrio."},
-        {n: "Diez de Copas", i: "diez de copas.png", r: "Felicidad familiar.", d: "Vivo en armonía con mis seres queridos."},
-        {n: "Reina de Copas", i: "reina de copas.png", r: "Empatía divina.", d: "Escucho mi corazón con amor."},
+        {n: "As de Copas", i: "as de copas.png", r: "Emoción.", d: "Mi corazón rebosa amor."},
+        {n: "Dos de Copas", i: "dos de copas.png", r: "Unión.", d: "Conecto con otros en armonía."},
+        {n: "Tres de Copas", i: "tres de copas.png", r: "Amistad.", d: "Celebro con mi tribu."},
+        {n: "Cuatro de Copas", i: "cuatro de copas.png", r: "Apatía.", d: "Busco nuevas motivaciones."},
+        {n: "Cinco de Copas", i: "cinco de copas.png", r: "Pérdida.", d: "Miro hacia lo que aún tengo."},
+        {n: "Seis de Copas", i: "seis de copas.png", r: "Nostalgia.", d: "Honro mis raíces con alegría."},
+        {n: "Siete de Copas", i: "siete de copas.png", r: "Opciones.", d: "Elijo con claridad."},
+        {n: "Ocho de Copas", i: "ocho de copas.png", r: "Búsqueda.", d: "Sigo mi camino espiritual."},
+        {n: "Nueve de Copas", i: "nueve de copas.png", r: "Deseo.", d: "Mis sueños se cumplen."},
+        {n: "Diez de Copas", i: "diez de copas.png", r: "Gozo.", d: "Vibró en amor familiar."},
+        {n: "Sota de Copas", i: "sota de copas.png", r: "Sensibilidad.", d: "Escucho mis sentimientos."},
+        {n: "Caballero de Copas", i: "caballero de copas.png", r: "Propuesta.", d: "Sigo el romance de la vida."},
+        {n: "Reina de Copas", i: "reina de copas.png", r: "Intuición.", d: "Soy un canal de amor puro."},
+        {n: "Rey de Copas", i: "rey de copas.png", r: "Maestría.", d: "Domino mis emociones con paz."},
 
         // ESPADAS
-        {n: "As de Espadas", i: "as de espadas.png", r: "Claridad mental.", d: "La verdad me hace libre."},
-        {n: "Tres de Espadas", i: "tres de espadas.png", r: "Sanación del dolor.", d: "Suelto lo que hiere para sanar."},
-        {n: "Rey de Espadas", i: "rey de espadas.png", r: "Justicia y lógica.", d: "Actúo con objetividad y poder."},
+        {n: "As de Espadas", i: "as de espadas.png", r: "Verdad.", d: "Mi mente es clara y afilada."},
+        {n: "Dos de Espadas", i: "dos de espadas.png", r: "Decisión.", d: "Encuentro mi equilibrio interno."},
+        {n: "Tres de Espadas", i: "tres de espadas.png", r: "Duelo.", d: "Sano mis heridas con amor."},
+        {n: "Cuatro de Espadas", i: "cuatro de espadas.png", r: "Descanso.", d: "Reposo para recuperar fuerzas."},
+        {n: "Cinco de Espadas", i: "cinco de espadas.png", r: "Conflicto.", d: "Elijo mis batallas sabiamente."},
+        {n: "Seis de Espadas", i: "seis de espadas.png", r: "Transición.", d: "Navego hacia aguas tranquilas."},
+        {n: "Siete de Espadas", i: "siete de espadas.png", r: "Estrategia.", d: "Actúo con astucia y cuidado."},
+        {n: "Ocho de Espadas", i: "ocho de espadas.png", r: "Prisión.", d: "Me libero de mis propios juicios."},
+        {n: "Nueve de Espadas", i: "nueve de espadas.png", r: "Angustia.", d: "Suelto la ansiedad por el futuro."},
+        {n: "Diez de Espadas", i: "diez de espadas.png", r: "Final.", d: "El ciclo oscuro ha terminado."},
+        {n: "Sota de Espadas", i: "sota de espadas.png", r: "Vigilancia.", d: "Observo la verdad con atención."},
+        {n: "Caballero de Espadas", i: "caballero de espadas.png", r: "Rapidez.", d: "Defiendo mis ideales con valor."},
+        {n: "Reina de Espadas", i: "reina de espadas.png", r: "Independencia.", d: "Hablo con la verdad y claridad."},
+        {n: "Rey de Espadas", i: "rey de espadas.png", r: "Intelecto.", d: "Actúo con lógica y justicia."},
 
-        // OROS (PENTÁCULOS)
-        {n: "As de Oros", i: "as de oros.png", r: "Prosperidad física.", d: "La abundancia llega a mi vida."},
-        {n: "Nueve de Oros", i: "nueve de oros.png", r: "Independencia.", d: "Disfruto los frutos de mi esfuerzo."},
-        {n: "Rey de Oros", i: "rey de oros.png", r: "Maestría material.", d: "Soy un imán para el éxito financiero."}
-        
-        // Puedes seguir esta lógica para completar las 78 exactamente con el nombre de tu foto
+        // OROS
+        {n: "As de Oros", i: "as de oros.png", r: "Prosperidad.", d: "Atraigo riqueza a mi vida."},
+        {n: "Dos de Oros", i: "dos de oros.png", r: "Adaptabilidad.", d: "Fluyo con mis prioridades."},
+        {n: "Tres de Oros", i: "tres de oros.png", r: "Maestría.", d: "Trabajo con excelencia."},
+        {n: "Cuatro de Oros", i: "cuatro de oros.png", r: "Seguridad.", d: "Cuido mis recursos con respeto."},
+        {n: "Cinco de Oros", i: "cinco de oros.png", r: "Escasez.", d: "Busco ayuda si la necesito."},
+        {n: "Seis de Oros", i: "seis de oros.png", r: "Generosidad.", d: "Doy y recibo con gratitud."},
+        {n: "Siete de Oros", i: "siete de oros.png", r: "Paciencia.", d: "Confío en la cosecha futura."},
+        {n: "Ocho de Oros", i: "ocho de oros.png", r: "Dedicación.", d: "Perfecciono mi arte cada día."},
+        {n: "Nueve de Ostatus", i: "nueve de oros.png", r: "Autonomía.", d: "Disfruto mi propio paraíso."},
+        {n: "Diez de Oros", i: "diez de oros.png", r: "Legado.", d: "Mi estabilidad es duradera."},
+        {n: "Sota de Oros", i: "sota de oros.png", r: "Estudio.", d: "Inicio un camino de aprendizaje."},
+        {n: "Caballero de Oros", i: "caballero de oros.png", r: "Eficiencia.", d: "Avanzo con paso firme."},
+        {n: "Reina de Oros", i: "reina de oros.png", r: "Nutrición.", d: "Cuido mi bienestar físico."},
+        {n: "Rey de Oros", i: "rey de oros.png", r: "Éxito.", d: "Soy maestro de mi mundo material."}
     ];
 
     function draw() {
         const card = cards[Math.floor(Math.random() * cards.length)];
-        const resultDiv = document.getElementById('result');
-        const introDiv = document.getElementById('intro');
-        
         // --- CAMBIA TU NÚMERO AQUÍ ---
         const miTelefono = "573224058597"; 
-        // -----------------------------
-
         const waLink = "https://wa.me/" + miTelefono + "?text=Hola Baram Rex, me ha salido la carta: " + card.n;
 
-        introDiv.style.display = 'none';
-        resultDiv.style.display = 'block';
-        
+        document.getElementById('intro').style.display = 'none';
+        document.getElementById('result').style.display = 'block';
         document.getElementById('card-display').innerHTML = `<img src="${card.i}" class="card-img" alt="${card.n}">`;
         document.getElementById('card-info').innerHTML = `
             <h2 class="gold-text">${card.n}</h2>
@@ -108,6 +141,5 @@
         `;
     }
 </script>
-
 </body>
 </html>
