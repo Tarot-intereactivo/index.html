@@ -3,68 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
     <title>Baram Rex - Oráculo Sagrado</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Garamond&display=swap');
-        body { background: #0a0a0a; color: #e0e0e0; font-family: 'Garamond', serif; text-align: center; padding: 20px; margin: 0; }
-        .container { max-width: 500px; margin: auto; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 20px; background: rgba(10, 10, 10, 0.95); box-shadow: 0 0 50px rgba(0,0,0,1); }
-        .gold-text { font-family: 'Cinzel', serif; color: #d4af37; text-transform: uppercase; letter-spacing: 3px; }
-        .card-img { width: 100%; max-width: 280px; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); margin-bottom: 20px; }
-        .btn-draw { background: linear-gradient(135deg, #d4af37, #aa892f); color: black; padding: 18px 35px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; font-family: 'Cinzel', serif; width: 100%; }
-        .btn-premium { display: block; background: #d4af37; color: black !important; text-decoration: none; padding: 15px; margin-top: 25px; border-radius: 10px; font-weight: bold; font-family: 'Cinzel', serif; text-transform: uppercase; }
-        .wisdom-box { background: rgba(255, 255, 255, 0.05); border-left: 3px solid #d4af37; padding: 15px; margin-top: 20px; text-align: left; border-radius: 0 10px 10px 0; }
-        #result { display: none; animation: fadeIn 0.8s; }
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        body { background: #0a0a0a; color: #e0e0e0; font-family: 'Garamond', serif; text-align: center; padding: 20px; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .container { max-width: 450px; width: 95%; border: 1px solid rgba(212, 175, 55, 0.3); padding: 30px; border-radius: 20px; background: rgba(15, 15, 15, 0.98); box-shadow: 0 0 50px rgba(0,0,0,1); }
+        .gold-text { font-family: 'Cinzel', serif; color: #d4af37; text-transform: uppercase; letter-spacing: 2px; margin: 15px 0; }
+        .card-img { width: 100%; max-width: 280px; border-radius: 12px; border: 2px solid #d4af37; box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); margin: 20px 0; }
+        .btn-draw { background: linear-gradient(135deg, #d4af37, #aa892f); color: black; padding: 20px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; font-family: 'Cinzel', serif; width: 100%; transition: 0.3s; }
+        .btn-draw:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+        .btn-premium { display: block; background: #d4af37; color: black !important; text-decoration: none; padding: 15px; margin-top: 25px; border-radius: 10px; font-weight: bold; font-family: 'Cinzel', serif; font-size: 0.9rem; }
+        .wisdom-box { background: rgba(255, 255, 255, 0.03); border-left: 3px solid #d4af37; padding: 15px; margin: 20px 0; text-align: left; font-style: italic; font-size: 1.1rem; line-height: 1.4; }
+        #result { display: none; animation: fadeIn 1s forwards; }
+        @keyframes fadeIn { from {opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: translateY(0);} }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1 class="gold-text">Baram Rex</h1>
-    <p style="font-style: italic; opacity: 0.8;">"El destino no es azar, es vibración."</p>
     <div id="intro">
-        <button class="btn-draw" onclick="draw()">REVELAR MI DESTINO</button>
+        <p style="font-style: italic; opacity: 0.8; margin-bottom: 30px;">"El mensaje que el universo tiene para ti hoy..."</p>
+        <button class="btn-draw" onclick="draw()">REVELAR MI CARTA</button>
     </div>
+
     <div id="result">
         <div id="card-display"></div>
         <div id="card-info"></div>
+        <button onclick="location.reload()" style="background:none; border:none; color:#d4af37; cursor:pointer; margin-top:20px; font-family:'Cinzel'; font-size: 0.8rem; letter-spacing: 1px;">✕ CONSULTAR OTRA VEZ</button>
     </div>
 </div>
 
 <script>
+    // IMPORTANTE: Asegúrate de que los archivos en GitHub tengan estos nombres exactos
     const cards = [
-        {n: "El Loco", i: "El-loco.png", r: "Inicio y aventura.", d: "Confío en mi viaje sagrado."},
-        {n: "El Mago", i: "El-mago.png", r: "Poder creativo.", d: "Tengo las herramientas para triunfar."},
-        {n: "La Sacerdotisa", i: "La-sacerdotiza.png", r: "Intuición profunda.", d: "Escucho mi voz interior."},
-        {n: "La Emperatriz", i: "La-emperatriz.png", r: "Abundancia.", d: "Merezco la belleza."},
-        {n: "El Emperador", i: "el-emperador.png", r: "Autoridad.", d: "Gobierno mi destino."},
-        {n: "La Fuerza", i: "LA-FUERZA.jpg", r: "Coraje.", d: "Domino mis sombras."},
-        {n: "La Muerte", i: "La-muerte.png", r: "Renacimiento.", d: "Muero al pasado."},
-        {n: "El Sol", i: "El-sol.png", r: "Éxito total.", d: "Yo soy luz pura."},
-        {n: "El Mundo", i: "el-mundo.png", r: "Plenitud.", d: "Soy uno con el todo."},
-        {n: "El Diablo", i: "El-diablo.png", r: "Apegos.", d: "Me libero de mis miedos."},
-        {n: "La Torre", i: "La-torre.png", r: "Liberación.", d: "Construyo sobre la verdad."},
-        {n: "Rey de Bastos", i: "REY-DE-BASTOS.png", r: "Liderazgo.", d: "Mi visión crea realidades."}
-        // Puedes añadir más siguiendo el mismo formato
+        {n: "El Loco", i: "el loco.png", r: "Nuevos comienzos.", d: "Confío en el viaje y doy el primer paso."},
+        {n: "El Mago", i: "el mago.png", r: "Poder creativo.", d: "Tengo todas las herramientas para lograrlo."},
+        {n: "La Sacerdotisa", i: "la sacerdotisa.png", r: "Intuición profunda.", d: "Escucho mi voz interior en el silencio."},
+        {n: "La Emperatriz", i: "la emperatriz.png", r: "Abundancia y fertilidad.", d: "Merezco recibir la belleza de la vida."},
+        {n: "El Emperador", i: "el emperador.png", r: "Autoridad y orden.", d: "Construyo mis sueños sobre bases sólidas."},
+        {n: "El Sumo Sacerdote", i: "el sumo sacerdote.png", r: "Tradición y guía.", d: "Busco la sabiduría en lo sagrado."},
+        {n: "Los Enamorados", i: "los enamorados.png", r: "Elecciones del corazón.", d: "Elijo el camino del amor y la armonía."},
+        {n: "El Carro", i: "el carro.png", r: "Victoria y determinación.", d: "Avanzo con fuerza hacia mis objetivos."},
+        {n: "La Justicia", i: "la justicia.png", r: "Equilibrio y verdad.", d: "Cosecho lo que he sembrado con honestidad."},
+        {n: "El Ermitaño", i: "el ermitaño.png", r: "Introspección.", d: "Busco la luz en mi propio interior."},
+        {n: "La Rueda de la Fortuna", i: "la rueda de la fortuna.png", r: "Cambios de destino.", d: "Acepto los ciclos naturales de la vida."},
+        {n: "La Fuerza", i: "la fuerza.png", r: "Coraje y paciencia.", d: "Domino mis sombras con compasión."},
+        {n: "El Colgado", i: "el colgado.png", r: "Nueva perspectiva.", d: "Suelto el control para ver la verdad."},
+        {n: "La Muerte", i: "la muerte.png", r: "Transformación profunda.", d: "Dejo morir lo viejo para renacer."},
+        {n: "La Templanza", i: "la templanza.png", r: "Moderación y paz.", d: "Encuentro el equilibrio en mis emociones."},
+        {n: "El Diablo", i: "el diablo.png", r: "Apegos y miedos.", d: "Me libero de las cadenas que yo mismo creé."},
+        {n: "La Torre", i: "la torre.png", r: "Revelación súbita.", d: "Construyo sobre la verdad, no sobre ilusiones."},
+        {n: "La Estrella", i: "la estrella.png", r: "Esperanza y fe.", d: "Confío en el flujo del universo."},
+        {n: "La Luna", i: "la luna.png", r: "Inconsciente y misterio.", d: "Atravieso mis miedos con claridad."},
+        {n: "El Sol", i: "el sol.png", r: "Éxito y claridad.", d: "Yo soy luz, éxito y alegría pura."},
+        {n: "El Juicio", i: "el juicio.png", r: "Renacimiento espiritual.", d: "Respondo al llamado de mi propósito."},
+        {n: "El Mundo", i: "el mundo.png", r: "Realización total.", d: "Soy uno con la danza del universo."}
     ];
 
     function draw() {
         const card = cards[Math.floor(Math.random() * cards.length)];
-        const miTelefono = "573224058597"; // CAMBIA ESTO POR TU NÚMERO
-        const waLink = "https://wa.me/" + miTelefono + "?text=Hola Baram Rex, mi carta es " + card.n;
+        const resultDiv = document.getElementById('result');
+        const introDiv = document.getElementById('intro');
+        
+        // --- CAMBIA TU NÚMERO AQUÍ ---
+        const miTelefono = "573224058597"; 
+        // -----------------------------
 
-        document.getElementById('intro').style.display = 'none';
-        document.getElementById('result').style.display = 'block';
-        document.getElementById('card-display').innerHTML = `<img src="./${card.i}" class="card-img">`;
+        const waLink = "https://wa.me/" + miTelefono + "?text=Hola Baram Rex, me ha salido la carta: " + card.n;
+
+        introDiv.style.display = 'none';
+        resultDiv.style.display = 'block';
+        
+        document.getElementById('card-display').innerHTML = `<img src="${card.i}" class="card-img" alt="${card.n}">`;
         document.getElementById('card-info').innerHTML = `
             <h2 class="gold-text">${card.n}</h2>
-            <p><strong>🔱 Revelación:</strong> ${card.r}</p>
-            <div class="wisdom-box"><p>" ${card.d} "</p></div>
-            <a href="${waLink}" target="_blank" class="btn-premium">CONSULTA PERSONALIZADA</a>
-            <br><button onclick="location.reload()" style="background:none; border:none; color:#d4af37; cursor:pointer; margin-top:10px;">Volver a intentar</button>
+            <p><strong>🔱 REVELACIÓN:</strong> ${card.r}</p>
+            <div class="wisdom-box">" ${card.d} "</div>
+            <a href="${waLink}" target="_blank" class="btn-premium">RECIBIR LECTURA PERSONALIZADA</a>
         `;
     }
 </script>
+
 </body>
 </html>
