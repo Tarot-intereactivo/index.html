@@ -31,12 +31,30 @@
 
 <script>
     // Solo 3 cartas para probar que el sistema funcione
-    const cards = [
-        {n: "El Loco", i: "El loco.png", r: "Nuevos comienzos.", d: "Confío en el viaje."},
-        {n: "El Mago", i: "El mago.png", r: "Poder total.", d: "Tengo los recursos."},
-        {n: "La Sacerdotisa", i: "La sacerdotiza.png", r: "Intuición.", d: "Escucho mi voz."}
+   const cards = [
+        {n: "El Loco", i: "El loco.png", r: "Nuevos comienzos.", d: "Confío en el viaje de la vida."},
+        {n: "El Mago", i: "El mago.png", r: "Poder y habilidad.", d: "Tengo los recursos para crear mi realidad."},
+        {n: "La Sacerdotisa", i: "La sacerdotiza.png", r: "Intuición.", d: "Escucho mi sabiduría interior."},
+        {n: "La Emperatriz", i: "La emperatriz.png", r: "Abundancia.", d: "Merezco la belleza y el crecimiento."},
+        {n: "El Emperador", i: "el emperador.png", r: "Estructura.", d: "Gobierno mi mundo con orden."},
+        {n: "El hierofante", i: "El hierofante.png", r: "Sabiduría.", d: "Sigo mi camino espiritual."},
+        {n: "Los Enamorados", i: "Los enamorados.png", r: "Amor.", d: "Elijo desde el corazón."},
+        {n: "El Carro", i: "El carro.png", r: "Victoria.", d: "Avanzo con determinación."},
+        {n: "La Justicia", i: "La justicia.png", r: "Equilibrio.", d: "Soy honesto conmigo mismo."},
+        {n: "El Ermitaño", i: "El ermitaño.png", r: "Guía interior.", d: "Busco la verdad en mi silencio."},
+        {n: "La Rueda de la Fortuna", i: "La rueda.png", r: "Cambio.", d: "Acepto los ciclos del destino."},
+        {n: "La Fuerza", i: "La fuerza.png", r: "Fortaleza.", d: "Mi suavidad es mi poder."},
+        {n: "El Colgado", i: "El colgado.png", r: "Perspectiva.", d: "Suelto para ver la verdad."},
+        {n: "La Muerte", i: "La muerte.png", r: "Renacer.", d: "Suelto el pasado para transformarme."},
+        {n: "La Templanza", i: "La templanza.png", r: "Armonía.", d: "Encuentro el equilibrio emocional."},
+        {n: "El Diablo", i: "El diablo.png", r: "Límites.", d: "Me libero de mis miedos internos."},
+        {n: "La Torre", i: "La torre.png", r: "Liberación.", d: "Construyo sobre verdades sólidas."},
+        {n: "La Estrella", i: "La estrella.png", r: "Esperanza.", d: "Mi fe guía mi camino."},
+        {n: "La Luna", i: "La luna.png", r: "Misterio.", d: "Atravieso mis sombras con valentía."},
+        {n: "El Sol", i: "El sol.png", r: "Éxito.", d: "Brillo con alegría y plenitud."},
+        {n: "El Juicio", i: "El juicio.png", r: "Llamado.", d: "Despierto a una nueva vida."},
+        {n: "El Mundo", i: "el mundo.png", r: "Plenitud.", d: "He completado mi ciclo con éxito."}
     ];
-
     function draw() {
         try {
             const card = cards[Math.floor(Math.random() * cards.length)];
