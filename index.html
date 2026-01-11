@@ -5,35 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baram Rex - Oráculo</title>
     <style>
-        body { background: #0a0a0a; color: #d4af37; font-family: serif; text-align: center; padding: 20px; }
-        .container { max-width: 400px; margin: auto; border: 1px solid #d4af37; padding: 20px; border-radius: 15px; }
-        .btn-draw { background: #d4af37; color: black; padding: 15px 30px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; width: 100%; }
-        .card-img { width: 100%; max-width: 250px; border: 2px solid #d4af37; margin-top: 20px; }
-        .wisdom-box { border-left: 2px solid #d4af37; padding: 10px; margin-top: 15px; font-style: italic; color: #e0e0e0; }
-        .btn-premium { display: block; background: #d4af37; color: black; text-decoration: none; padding: 10px; margin-top: 20px; font-weight: bold; border-radius: 5px; }
+        body { background: #0a0a0a; color: #d4af37; font-family: 'Georgia', serif; text-align: center; padding: 20px; }
+        .container { max-width: 400px; margin: auto; border: 1px solid #d4af37; padding: 20px; border-radius: 15px; background: rgba(15, 15, 15, 0.9); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+        .gold-text { color: #d4af37; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-draw { background: #d4af37; color: black; padding: 15px 30px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1rem; transition: 0.3s; }
+        .btn-draw:hover { background: #fff; box-shadow: 0 0 15px #d4af37; }
+        .card-img { width: 100%; max-width: 280px; border: 2px solid #d4af37; margin-top: 20px; border-radius: 10px; }
+        .wisdom-box { border: 1px solid #d4af37; padding: 15px; margin-top: 15px; font-style: italic; color: #e0e0e0; background: rgba(212, 175, 55, 0.05); }
+        .btn-premium { display: block; background: #d4af37; color: black; text-decoration: none; padding: 12px; margin-top: 20px; font-weight: bold; border-radius: 5px; }
+        .btn-reload { background: none; border: 1px solid #444; color: #888; padding: 8px 15px; margin-top: 25px; cursor: pointer; border-radius: 20px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Baram Rex</h1>
+    <h1 class="gold-text">Baram Rex</h1>
+    
     <div id="intro">
-        <p>"El destino se revela ante ti..."</p>
+        <p>"El destino aguarda tras el velo..."</p>
         <button class="btn-draw" onclick="draw()">REVELAR MI CARTA</button>
     </div>
 
     <div id="result" style="display:none;">
-    <div id="card-display"></div>
-    <div id="card-info"></div>
-    
-    <a href="AQUÍ_TU_ENLACE_DE_RECETAS" class="btn-abuelas">
-        👵 RECETAS DE LAS ABUELAS
-    </a>
+        <div id="card-display"></div>
+        <div id="card-info"></div>
+        <button class="btn-reload" onclick="location.reload()">✕ REALIZAR NUEVA TIRADA</button>
+    </div>
 </div>
 
 <script>
-    // Solo 3 cartas para probar que el sistema funcione
-   const cards = [
+    const cards = [
+        // ARCANOS MAYORES
         {n: "El Loco", i: "El loco.png", r: "Nuevos comienzos.", d: "Confío en el viaje de la vida."},
         {n: "El Mago", i: "El mago.png", r: "Poder y habilidad.", d: "Tengo los recursos para crear mi realidad."},
         {n: "La Sacerdotisa", i: "La sacerdotiza.png", r: "Intuición.", d: "Escucho mi sabiduría interior."},
@@ -55,7 +57,8 @@
         {n: "La Luna", i: "La luna.png", r: "Misterio.", d: "Atravieso mis sombras con valentía."},
         {n: "El Sol", i: "El sol.png", r: "Éxito.", d: "Brillo con alegría y plenitud."},
         {n: "El Juicio", i: "El juicio.png", r: "Llamado.", d: "Despierto a una nueva vida."},
-        {n: "El Mundo", i: "el mundo.png", r: "Plenitud.", d: "He completado mi ciclo con éxito."},// BASTOS
+        {n: "El Mundo", i: "el mundo.png", r: "Plenitud.", d: "He completado mi ciclo con éxito."},
+        // BASTOS
         {n: "As de Bastos", i: "As de bastos.png", r: "Inspiración.", d: "Actúo con pasión hoy."},
         {n: "Dos de Bastos", i: "2 BASTOS.png", r: "Planes.", d: "Visualizo mi futuro éxito."},
         {n: "Tres de Bastos", i: "3 BASTOS.png", r: "Expansión.", d: "Mis barcos están llegando."},
@@ -70,7 +73,6 @@
         {n: "Caballero de Bastos", i: "CABALLERO DE BASTOS.png", r: "Impulso.", d: "Avanzo con fuego."},
         {n: "Reina de Bastos", i: "REINA DE BASTOS.png", r: "Confianza.", d: "Soy magnético y audaz."},
         {n: "Rey de Bastos", i: "REY DE BASTOS.png", r: "Visión.", d: "Lidero con determinación."},
-
         // COPAS
         {n: "As de Copas", i: "As de copas.png", r: "Emoción.", d: "Mi corazón rebosa amor."},
         {n: "Dos de Copas", i: "2 COPAS.png", r: "Unión.", d: "Conecto con otros en armonía."},
@@ -86,7 +88,6 @@
         {n: "Caballero de Copas", i: "CABALLERO COPAS.png", r: "Propuesta.", d: "Sigo el romance de la vida."},
         {n: "Reina de Copas", i: "REINA DE COPAS.png", r: "Intuición.", d: "Soy un canal de amor puro."},
         {n: "Rey de Copas", i: "REY DE COPAS.png", r: "Maestría.", d: "Domino mis emociones con paz."},
-
         // ESPADAS
         {n: "As de Espadas", i: "As de espadas.png", r: "Verdad.", d: "Mi mente es clara y afilada."},
         {n: "Dos de Espadas", i: "2 ESPADAS.png", r: "Decisión.", d: "Encuentro mi equilibrio interno."},
@@ -102,7 +103,6 @@
         {n: "Caballero de Espadas", i: "CABALLERO DE ESPADAS.png", r: "Rapidez.", d: "Defiendo mis ideales con valor."},
         {n: "Reina de Espadas", i: "REINA DE ESPADAS.png", r: "Independencia.", d: "Hablo con la verdad y claridad."},
         {n: "Rey de Espadas", i: "REY DE ESPADAS.png", r: "Intelecto.", d: "Actúo con lógica y justicia."},
-
         // OROS
         {n: "As de Oros", i: "As de oros.png", r: "Prosperidad.", d: "Atraigo riqueza a mi vida."},
         {n: "Dos de Oros", i: "2 OROS.png", r: "Adaptabilidad.", d: "Fluyo con mis prioridades."},
@@ -119,103 +119,32 @@
         {n: "Reina de Oros", i: "REINA OROS.png", r: "Nutrición.", d: "Cuido mi bienestar físico."},
         {n: "Rey de Oros", i: "REY DE OROS.png", r: "Éxito.", d: "Soy maestro de mi mundo material."}
     ];
+
     function draw() {
         try {
             const card = cards[Math.floor(Math.random() * cards.length)];
-            const waLink = "https://wa.me/573224058597?text=Carta: " + card.n;
-
-            document.getElementById('intro').style.display = 'none';
-            document.getElementById('result').style.display = 'block';
-
-            document.getElementById('card-display').innerHTML = `<img src="${card.i}" class="card-img" onerror="this.style.display='none'">`;
-            document.getElementById('card-info').innerHTML = `
-                <h2>${card.n}</h2>
-                <p><strong>REVELACIÓN:</strong> ${card.r}</p>
-                <div class="wisdom-box">"${card.d}"</div>
-                <a href="${waLink}" target="_blank" class="btn-premium">LECTURA PERSONALIZADA</a>
-            `;
-        } catch (e) {
-            alert("Error: " + e);
-        }
-    }
-<script>
-    const cards = [
-        // ... (Manten toda tu lista de 78 cartas aquí igual que antes) ...
-    ];
-
-    // Función para verificar si puede tirar
-    function canDraw() {
-        const lastDraw = localStorage.getItem('lastDrawRex');
-        if (!lastDraw) return true;
-
-        const now = new Date().getTime();
-        const diff = now - parseInt(lastDraw);
-        const hours24 = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
-
-        return diff >= hours24;
-    }
-
-    function updateTimer() {
-        const lastDraw = localStorage.getItem('lastDrawRex');
-        if (!lastDraw) return;
-
-        const now = new Date().getTime();
-        const diff = now - parseInt(lastDraw);
-        const timeLeft = (24 * 60 * 60 * 1000) - diff;
-
-        if (timeLeft > 0) {
-            const h = Math.floor(timeLeft / (1000 * 60 * 60));
-            const m = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('intro').innerHTML = `
-                <div class="wisdom-box">
-                    <p>El Oráculo ha hablado para ti hoy.</p>
-                    <p style="color:#d4af37">Podrás consultar de nuevo en:</p>
-                    <h2 style="font-size: 1.5rem;">${h}h ${m}m</h2>
-                    <p>Medita en tu mensaje actual.</p>
-                </div>
-            `;
-        } else {
-            location.reload(); // Si el tiempo pasó, recarga para permitir otra tirada
-        }
-    }
-
-    function draw() {
-        if (!canDraw()) {
-            alert("El destino ya ha sido revelado. Regresa mañana.");
-            return;
-        }
-
-        try {
-            const card = cards[Math.floor(Math.random() * cards.length)];
-            const waLink = "https://wa.me/573224058597?text=Carta: " + encodeURIComponent(card.n);
-
-            // Guardar el momento de la tirada
-            localStorage.setItem('lastDrawRex', new Date().getTime());
+            const waLink = "https://wa.me/573224058597?text=Hola Baram Rex, mi carta es: " + encodeURIComponent(card.n);
 
             document.getElementById('intro').style.display = 'none';
             document.getElementById('result').style.display = 'block';
 
             document.getElementById('card-display').innerHTML = `
-                <img src="${card.i}" class="card-img" onerror="this.style.display='none'">
+                <img src="${card.i}" class="card-img" alt="${card.n}" onerror="this.src='https://via.placeholder.com/280x450/111/d4af37?text=Cargando+Imagen...';">
             `;
+            
             document.getElementById('card-info').innerHTML = `
                 <h2 class="gold-text">${card.n}</h2>
-                <p><strong>🔱 REVELACIÓN:</strong> ${card.r}</p>
-                <div class="wisdom-box">"${card.d}"</div>
+                <div class="wisdom-box">
+                    <p><strong>🔱 REVELACIÓN:</strong> ${card.r}</p>
+                    <p>"${card.d}"</p>
+                </div>
                 <a href="${waLink}" target="_blank" class="btn-premium">RECIBIR LECTURA PERSONALIZADA</a>
             `;
         } catch (e) {
             console.error(e);
+            alert("Hubo un error en la conexión espiritual. Intenta de nuevo.");
         }
     }
-
-    // Al cargar la página, si ya tiró hoy, mostrar el reloj
-    window.onload = function() {
-        if (!canDraw()) {
-            updateTimer();
-            setInterval(updateTimer, 60000); // Actualizar reloj cada minuto
-        }
-    };
 </script>
 </body>
 </html>
