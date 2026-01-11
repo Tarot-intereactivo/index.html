@@ -1,13 +1,21 @@
-{
-  "cartas": {
-    "mago": "🧙‍♂️ El Mago: Tienes el poder de manifestar tu realidad. Baram Rex te dice: 'La voluntad es tu mayor herramienta'.",
-    "sacerdotisa": "🌙 La Sacerdotisa: Momento de introspección. Los secretos se revelan en el silencio.",
-    "emperador": "👑 El Emperador: Autoridad y estructura. Es tiempo de tomar el control de tu imperio."
-  },
-  "remedios": {
-    "digestion": "🌿 Digestión: Usa infusión de semillas de hinojo después de comer para eliminar la pesadez.",
-    "ansiedad": "🍵 Ansiedad: Una mezcla de valeriana y manzanilla calmará tu espíritu antes de dormir.",
-    "gastritis": "🌵 Gastritis: El cristal de sábila (aloe vera) en ayunas protege tu templo interno."
-  },
-  "biografia": "Soy Baram Rex, el Guardián de la Sabiduría Ancestral y el Oráculo Digital."
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Codex Baram Rex</title>
+    <style>
+        body { background: #000; color: gold; font-family: serif; text-align: center; }
+        .secreto { border: 1px solid gold; margin: 10px; padding: 10px; display: none; } /* Ocultos en la web, visibles para el bot */
+    </style>
+</head>
+<body>
+    <h1>Obras de Baram Rex</h1>
+    <p>Bienvenido al santuario digital.</p>
+
+    <div id="mago" class="secreto">El Mago: Tienes el poder total. Baram Rex te dice que hoy es el día de iniciar tu gran obra.</div>
+    <div id="sacerdotisa" class="secreto">La Sacerdotisa: El misterio te rodea. Guarda silencio y escucha tu voz interior.</div>
+    <div id="remedio_digestion" class="secreto">Remedio: Bebe infusión de manzanilla con pizca de jengibre después del festín.</div>
+
+    <a href="https://t.me/TU_BOT_USUARIO">Hablar con el Robot de Baram Rex</a>
+</body>
+</html>
