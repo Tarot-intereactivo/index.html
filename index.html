@@ -136,6 +136,84 @@
             alert("Error: " + e);
         }
     }
+<script>
+    const cards = [
+        // ... (Manten toda tu lista de 78 cartas aquí igual que antes) ...
+    ];
+
+    // Función para verificar si puede tirar
+    function canDraw() {
+        const lastDraw = localStorage.getItem('lastDrawRex');
+        if (!lastDraw) return true;
+
+        const now = new Date().getTime();
+        const diff = now - parseInt(lastDraw);
+        const hours24 = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+
+        return diff >= hours24;
+    }
+
+    function updateTimer() {
+        const lastDraw = localStorage.getItem('lastDrawRex');
+        if (!lastDraw) return;
+
+        const now = new Date().getTime();
+        const diff = now - parseInt(lastDraw);
+        const timeLeft = (24 * 60 * 60 * 1000) - diff;
+
+        if (timeLeft > 0) {
+            const h = Math.floor(timeLeft / (1000 * 60 * 60));
+            const m = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('intro').innerHTML = `
+                <div class="wisdom-box">
+                    <p>El Oráculo ha hablado para ti hoy.</p>
+                    <p style="color:#d4af37">Podrás consultar de nuevo en:</p>
+                    <h2 style="font-size: 1.5rem;">${h}h ${m}m</h2>
+                    <p>Medita en tu mensaje actual.</p>
+                </div>
+            `;
+        } else {
+            location.reload(); // Si el tiempo pasó, recarga para permitir otra tirada
+        }
+    }
+
+    function draw() {
+        if (!canDraw()) {
+            alert("El destino ya ha sido revelado. Regresa mañana.");
+            return;
+        }
+
+        try {
+            const card = cards[Math.floor(Math.random() * cards.length)];
+            const waLink = "https://wa.me/573224058597?text=Carta: " + encodeURIComponent(card.n);
+
+            // Guardar el momento de la tirada
+            localStorage.setItem('lastDrawRex', new Date().getTime());
+
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+
+            document.getElementById('card-display').innerHTML = `
+                <img src="${card.i}" class="card-img" onerror="this.style.display='none'">
+            `;
+            document.getElementById('card-info').innerHTML = `
+                <h2 class="gold-text">${card.n}</h2>
+                <p><strong>🔱 REVELACIÓN:</strong> ${card.r}</p>
+                <div class="wisdom-box">"${card.d}"</div>
+                <a href="${waLink}" target="_blank" class="btn-premium">RECIBIR LECTURA PERSONALIZADA</a>
+            `;
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    // Al cargar la página, si ya tiró hoy, mostrar el reloj
+    window.onload = function() {
+        if (!canDraw()) {
+            updateTimer();
+            setInterval(updateTimer, 60000); // Actualizar reloj cada minuto
+        }
+    };
 </script>
 </body>
 </html>
