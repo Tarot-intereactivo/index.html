@@ -146,50 +146,53 @@
     <span id="info-La Sacerdotisa">La Sacerdotisa: Intuición. Escucho mi sabiduría interior.</span>
     </div>
 <script>
+    // Asegúrate de que los nombres aquí sean IDÉNTICOS a tus archivos en GitHub
     const cards = [
-        // Asegúrate de que esta lista esté completa en tu archivo
         {n: "El Loco", i: "El loco.png", r: "Nuevos comienzos.", d: "Confío en el viaje de la vida."},
         {n: "El Mago", i: "El mago.png", r: "Poder y habilidad.", d: "Tengo los recursos para crear mi realidad."},
         {n: "La Sacerdotisa", i: "La sacerdotiza.png", r: "Intuición.", d: "Escucho mi sabiduría interior."},
-        // ... (aquí van todas tus cartas)
-        {n: "Rey de Oros", i: "REY DE OROS.png", r: "Éxito.", d: "Soy maestro de mi mundo material."}
+        {n: "La Emperatriz", i: "La emperatriz.png", r: "Abundancia.", d: "Merezco la belleza y el crecimiento."},
+        {n: "El Emperador", i: "el emperador.png", r: "Estructura.", d: "Gobierno mi mundo con orden."}
+        // ... agrega las demás siguiendo este formato exacto
     ];
 
     function draw() {
+        console.log("Iniciando tirada...");
+        
         try {
-            console.log("Iniciando revelación..."); // Esto nos ayuda a ver si el botón responde
-            
-            // 1. Seleccionar carta al azar
-            const randomIndex = Math.floor(Math.random() * cards.length);
-            const card = cards[randomIndex];
-
-            // 2. Configurar enlace de WhatsApp
+            const card = cards[Math.floor(Math.random() * cards.length)];
             const miTelefono = "573224058597"; 
-            const waLink = "https://wa.me/" + miTelefono + "?text=Hola Baram Rex, me ha salido la carta: " + encodeURIComponent(card.n);
+            const waLink = "https://wa.me/" + miTelefono + "?text=" + encodeURIComponent("Hola Baram Rex, me ha salido la carta: " + card.n);
 
-            // 3. Ocultar intro y mostrar resultado
+            // Ocultar inicio
             document.getElementById('intro').style.display = 'none';
+            
+            // Mostrar resultados
             const resultDiv = document.getElementById('result');
             resultDiv.style.display = 'block';
 
-            // 4. Inyectar contenido (con protección de error de imagen)
+            // Insertar Imagen con detector de errores
             document.getElementById('card-display').innerHTML = `
-                <img src="${card.i}" class="card-img" alt="${card.n}" 
-                     onerror="this.onerror=null; this.src='https://via.placeholder.com/280x450/000000/d4af37?text=Cargando+Carta...';">
-            `;
-            
-            document.getElementById('card-info').innerHTML = `
-                <h2 class="gold-text">${card.n}</h2>
-                <p><strong>🔱 REVELACIÓN:</strong> ${card.r}</p>
-                <div class="wisdom-box">" ${card.d} "</div>
-                <a href="${waLink}" target="_blank" class="btn-premium">RECIBIR LECTURA PERSONALIZADA</a>
+                <img src="${card.i}" 
+                     class="card-img" 
+                     alt="${card.n}" 
+                     onerror="this.src='https://via.placeholder.com/280x450/1a1a1a/d4af37?text=Imagen+en+Camino'; this.style.border='1px dashed #d4af37';">
             `;
 
-        } catch (error) {
-            console.error("Error en la tirada:", error);
-            alert("El destino está nublado. Intenta de nuevo.");
+            // Insertar Texto
+            document.getElementById('card-info').innerHTML = `
+                <h2 class="gold-text">${card.n}</h2>
+                <div class="wisdom-box">
+                    <p><strong>🔱 REVELACIÓN:</strong> ${card.r}</p>
+                    <p><em>"${card.d}"</em></p>
+                </div>
+                <a href="${waLink}" target="_blank" class="btn-premium">RECIBIR LECTURA PERSONALIZADA</a>
+            `;
+            
+            console.log("Revelación completada para: " + card.n);
+        } catch (e) {
+            console.error("Error en draw(): ", e);
+            alert("El destino está cargando. Por favor, intenta de nuevo.");
         }
     }
-</script>    
-</body>
-</html>
+</script>
