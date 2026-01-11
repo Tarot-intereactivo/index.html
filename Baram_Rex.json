@@ -140,6 +140,10 @@
             <a href="${waLink}" target="_blank" class="btn-premium">RECIBIR LECTURA PERSONALIZADA</a>
         `;
     }
+<div id="codex-bot" style="display: none;">
+    <span id="info-El Mago">El Mago: Poder y habilidad. Tengo los recursos para crear mi realidad.</span>
+    <span id="info-La Sacerdotisa">La Sacerdotisa: Intuición. Escucho mi sabiduría interior.</span>
+    </div>
 </script>
 </body>
 </html>
